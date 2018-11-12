@@ -1,0 +1,2594 @@
+swagger: "2.0"
+
+servers:
+- url: http://localhost:35001/
+
+paths:
+
+
+definitions:
+  MutableCollection:
+    type: "array"
+    items:
+      type: string
+
+
+  Agile:
+    required:
+    - "colorCoding"
+    - "columnSettings"
+    - "currentSprint"
+    - "estimationField"
+    - "flatBacklog"
+    - "hideOrphansSwimlane"
+    - "isUpdatable"
+    - "name"
+    - "orphansAtTheTop"
+    - "owner"
+    - "projects"
+    - "sprints"
+    - "sprintsSettings"
+    - "status"
+    - "swimlaneSettings"
+    - "updateableBy"
+    - "updateableByProjectBased"
+    - "visibleFor"
+    - "visibleForProjectBased"
+    - "id"
+    properties:
+      colorCoding:
+        $ref: '#/definitions/User'
+      columnSettings:
+        $ref: '#/definitions/ColumnSettings'
+      currentSprint:
+        $ref: '#/definitions/Sprint'
+      estimationField:
+        $ref: '#/definitions/CustomField'
+      flatBacklog:
+        type: "boolean"
+      hideOrphansSwimlane:
+        type: "boolean"
+      isUpdatable:
+        type: "boolean"
+      name:
+        type: "string"
+      orphansAtTheTop:
+        type: "boolean"
+      owner:
+        $ref: '#/definitions/User'
+      projects:
+        $ref: '#/definitions/MutableCollection'
+      sprints:
+        $ref: '#/definitions/MutableCollection'
+      sprintsSettings:
+        $ref: '#/definitions/SprintsSettings'
+      status:
+
+        $ref: '#/definitions/AgileStatus'
+      swimlaneSettings:
+
+        $ref: '#/definitions/AttributeBasedSwimlaneSettings'
+      updateableBy:
+
+        $ref: '#/definitions/UserGroup'
+      updateableByProjectBased:
+        type: "boolean"
+      visibleFor:
+
+        $ref: '#/definitions/UserGroup'
+      visibleForProjectBased:
+        type: "boolean"
+      id:
+        type: "string"
+    type: "object"
+  AgileColumn:
+    required:
+    - "fieldValues"
+    - "isResolved"
+    - "ordinal"
+    - "parent"
+    - "presentation"
+    - "wipLimit"
+    - "id"
+    properties:
+      fieldValues:
+
+        $ref: '#/definitions/MutableCollection'
+      isResolved:
+        type: "boolean"
+      ordinal:
+        type: "integer"
+      parent:
+
+        $ref: '#/definitions/ColumnSettings'
+      presentation:
+        type: "string"
+      wipLimit:
+
+        $ref: '#/definitions/WIPLimit'
+      id:
+        type: "string"
+    type: "object"
+  AgileStatus:
+    required:
+    - "errors"
+    - "hasJobs"
+    - "id"
+    - "valid"
+    - "warnings"
+    properties:
+      errors:
+        type: "array"
+        items:
+      hasJobs:
+        type: "boolean"
+      id:
+        type: "string"
+      valid:
+        type: "boolean"
+      warnings:
+        type: "array"
+        items:
+    type: "object"
+  AppearanceSettings:
+    required:
+    - "dateFieldFormat"
+    - "logo"
+    - "timeZone"
+    - "id"
+    properties:
+      dateFieldFormat:
+        $ref: '#/definitions/DateFormatDescriptor'
+      logo:
+        $ref: '#/definitions/Logo'
+      timeZone:
+        $ref: '#/definitions/TimeZoneDescriptor'
+      id:
+        type: "string"
+    type: "object"
+  AttributeBasedSwimlaneSettings:
+    required:
+    - "field"
+    - "values"
+    - "enabled"
+    - "id"
+    - "parent"
+    properties:
+      field:
+        $ref: '#/definitions/FilterField'
+      values:
+        $ref: '#/definitions/MutableCollection'
+      enabled:
+        type: "boolean"
+      id:
+        type: "string"
+      parent:
+        $ref: '#/definitions/Agile'
+    type: "object"
+  BackupError:
+    required:
+    - "date"
+    - "errorMessage"
+    - "id"
+    properties:
+      date:
+        type: "int"
+      errorMessage:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  BackupFile:
+    required:
+    - "creationDate"
+    - "error"
+    - "id"
+    - "link"
+    - "name"
+    - "size"
+    properties:
+      creationDate:
+        type: "int"
+      error:
+        type: "string"
+      id:
+        type: "string"
+      link:
+        type: "string"
+      name:
+        type: "string"
+      size:
+        type: "int"
+    type: "object"
+  BackupStatus:
+    required:
+    - "backupCancelled"
+    - "backupError"
+    - "backupInProgress"
+    - "stopBackup"
+    - "id"
+    properties:
+      backupCancelled:
+        type: "boolean"
+      backupError:
+        $ref: '#/definitions/BackupError'
+      backupInProgress:
+        type: "boolean"
+      stopBackup:
+        type: "boolean"
+      id:
+        type: "string"
+    type: "object"
+  BuildBundle:
+    required:
+    - "values"
+    - "id"
+    - "isUpdateable"
+    - "name"
+    properties:
+      values:
+        $ref: '#/definitions/MutableCollection'
+      id:
+        type: "string"
+      isUpdateable:
+        type: "boolean"
+      name:
+        type: "string"
+    type: "object"
+  BuildBundleCustomFieldDefaults:
+    required:
+    - "bundle"
+    - "defaultValues"
+    - "canBeEmpty"
+    - "emptyFieldText"
+    - "id"
+    - "isPublic"
+    - "parent"
+    properties:
+      bundle:
+         $ref: '#/definitions/BuildBundle'
+      defaultValues:
+        $ref: '#/definitions/MutableCollection'
+      canBeEmpty:
+        type: "boolean"
+      emptyFieldText:
+        type: "string"
+      id:
+        type: "string"
+      isPublic:
+        type: "boolean"
+      parent:
+        $ref: '#/definitions/CustomField'
+    type: "object"
+  BuildBundleElement:
+    required:
+    - "assembleDate"
+    - "bundle"
+    - "color"
+    - "description"
+    - "hasRunningJob"
+    - "id"
+    - "name"
+    - "ordinal"
+    properties:
+      assembleDate:
+        type: "int"
+      bundle:
+         $ref: '#/definitions/BuildBundle'
+      color:
+        $ref: '#/definitions/FieldStyle'
+      description:
+        type: "string"
+      hasRunningJob:
+        type: "boolean"
+      id:
+        type: "string"
+      name:
+        type: "string"
+      ordinal:
+        type: "int"
+    type: "object"
+  BuildProjectCustomField:
+    required:
+    - "bundle"
+    - "canBeEmpty"
+    - "condition"
+    - "defaultValues"
+    - "emptyFieldText"
+    - "field"
+    - "hasRunningJob"
+    - "id"
+    - "isPublic"
+    - "ordinal"
+    - "project"
+    properties:
+      bundle:
+        $ref: '#/definitions/BuildBundle'
+      canBeEmpty:
+        type: "boolean"
+      condition:
+        $ref: '#/definitions/CustomFieldCondition'
+      defaultValues:
+        type: "string"
+      emptyFieldText:
+        type: "string"
+      field:
+        type: "string"
+      hasRunningJob:
+        type: "string"
+      id:
+        type: "string"
+      isPublic:
+        type: "string"
+      ordinal:
+        type: "string"
+      project:
+        type: "string"
+    type: "object"
+  CheckResult:
+    required:
+    - "date"
+    - "downloadUrl"
+    - "id"
+    - "message"
+    - "success"
+    - "updateAvailable"
+    properties:
+      date:
+        type: "string"
+      downloadUrl:
+        type: "string"
+      id:
+        type: "string"
+      message:
+        type: "string"
+      success:
+        type: "string"
+      updateAvailable:
+        type: "string"
+    type: "object"
+  ColumnSettings:
+    required:
+    - "columns"
+    - "field"
+    - "id"
+    properties:
+      columns:
+        type: "string"
+      field:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  CommandLimitedVisibility:
+    required:
+    - "id"
+    - "permittedGroups"
+    - "permittedUsers"
+    properties:
+      id:
+        type: "string"
+      permittedGroups:
+        type: "string"
+      permittedUsers:
+        type: "string"
+    type: "object"
+  CommandList:
+    required:
+    - "caret"
+    - "commands"
+    - "comment"
+    - "issues"
+    - "permittedGroup"
+    - "query"
+    - "runAs"
+    - "silent"
+    - "suggestions"
+    - "usesMarkdown"
+    - "visibility"
+    - "id"
+    properties:
+      caret:
+        type: "string"
+      commands:
+        type: "string"
+      comment:
+        type: "string"
+      issues:
+        type: "string"
+      permittedGroup:
+        type: "string"
+      query:
+        type: "string"
+      runAs:
+        type: "string"
+      silent:
+        type: "string"
+      suggestions:
+        type: "string"
+      usesMarkdown:
+        type: "string"
+      visibility:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  CommandUnlimitedVisibility:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "string"
+    type: "object"
+  CustomField:
+    required:
+    - "aliases"
+    - "fieldDefaults"
+    - "fieldType"
+    - "hasRunningJob"
+    - "instances"
+    - "isAutoAttached"
+    - "isDisplayedInIssueList"
+    - "isUpdateable"
+    - "localizedName"
+    - "name"
+    - "ordinal"
+    - "id"
+    properties:
+      aliases:
+        type: "string"
+      fieldDefaults:
+        type: "string"
+      fieldType:
+        type: "string"
+      hasRunningJob:
+        type: "string"
+      instances:
+        type: "string"
+      isAutoAttached:
+        type: "string"
+      isDisplayedInIssueList:
+        type: "string"
+      isUpdateable:
+        type: "string"
+      localizedName:
+        type: "string"
+      name:
+        type: "string"
+      ordinal:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  CustomFieldDefaults:
+    required:
+    - "canBeEmpty"
+    - "emptyFieldText"
+    - "isPublic"
+    - "parent"
+    - "id"
+    properties:
+      canBeEmpty:
+        type: "string"
+      emptyFieldText:
+        type: "string"
+      isPublic:
+        type: "string"
+      parent:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  CustomFilterField:
+    required:
+    - "customField"
+    - "projects"
+    - "xdField"
+    - "aggregateable"
+    - "baseField"
+    - "id"
+    - "name"
+    - "presentation"
+    - "sortable"
+    properties:
+      customField:
+        type: "string"
+      projects:
+        type: "string"
+      xdField:
+        type: "string"
+      aggregateable:
+        type: "string"
+      baseField:
+        type: "string"
+      id:
+        type: "string"
+      name:
+        type: "string"
+      presentation:
+        type: "string"
+      sortable:
+        type: "string"
+    type: "object"
+  DatabaseBackupSettings:
+    required:
+    - "archiveFormat"
+    - "availableDiskSpace"
+    - "backupStatus"
+    - "cronExpression"
+    - "defaultLocation"
+    - "filesToKeep"
+    - "isOn"
+    - "location"
+    - "notifiedUsers"
+    - "id"
+    properties:
+      archiveFormat:
+        type: "string"
+      availableDiskSpace:
+        type: "string"
+      backupStatus:
+        type: "string"
+      cronExpression:
+        type: "string"
+      defaultLocation:
+        type: "string"
+      filesToKeep:
+        type: "string"
+      isOn:
+        type: "string"
+      location:
+        type: "string"
+      notifiedUsers:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  DateFormatDescriptor:
+    required:
+    - "dateNoYearPattern"
+    - "datePattern"
+    - "id"
+    - "monthPattern"
+    - "pattern"
+    - "presentation"
+    properties:
+      dateNoYearPattern:
+        type: "string"
+      datePattern:
+        type: "string"
+      id:
+        type: "string"
+      monthPattern:
+        type: "string"
+      pattern:
+        type: "string"
+      presentation:
+        type: "string"
+    type: "object"
+  DraftIssueComment:
+    required:
+    - "attachments"
+    - "created"
+    - "id"
+    - "text"
+    - "textPreview"
+    - "updated"
+    - "usesMarkdown"
+    - "visibility"
+    properties:
+      attachments:
+        type: "string"
+      created:
+        type: "string"
+      id:
+        type: "string"
+      text:
+        type: "string"
+      textPreview:
+        type: "string"
+      updated:
+        type: "string"
+      usesMarkdown:
+        type: "string"
+      visibility:
+        type: "string"
+    type: "object"
+  DuplicateVote:
+    required:
+    - "id"
+    - "issue"
+    - "user"
+    properties:
+      id:
+        type: "string"
+      issue:
+        type: "string"
+      user:
+        type: "string"
+    type: "object"
+  EmailSettings:
+    required:
+    - "from"
+    - "host"
+    - "isEnabled"
+    - "login"
+    - "mailProtocol"
+    - "port"
+    - "readAccess"
+    - "replyTo"
+    - "sslKey"
+    - "id"
+    properties:
+      from:
+        type: "string"
+      host:
+        type: "string"
+      isEnabled:
+        type: "string"
+      login:
+        type: "string"
+      mailProtocol:
+        type: "string"
+      port:
+        type: "string"
+      readAccess:
+        type: "string"
+      replyTo:
+        type: "string"
+      sslKey:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  EnumBundle:
+    required:
+    - "values"
+    - "id"
+    - "isUpdateable"
+    - "name"
+    properties:
+      values:
+        type: "string"
+      id:
+        type: "string"
+      isUpdateable:
+        type: "string"
+      name:
+        type: "string"
+    type: "object"
+  EnumBundleCustomFieldDefaults:
+    required:
+    - "bundle"
+    - "defaultValues"
+    - "canBeEmpty"
+    - "emptyFieldText"
+    - "id"
+    - "isPublic"
+    - "parent"
+    properties:
+      bundle:
+        type: "string"
+      defaultValues:
+        type: "string"
+      canBeEmpty:
+        type: "string"
+      emptyFieldText:
+        type: "string"
+      id:
+        type: "string"
+      isPublic:
+        type: "string"
+      parent:
+        type: "string"
+    type: "object"
+  EnumBundleElement:
+    required:
+    - "bundle"
+    - "color"
+    - "description"
+    - "hasRunningJob"
+    - "id"
+    - "localizedName"
+    - "name"
+    - "ordinal"
+    properties:
+      bundle:
+        type: "string"
+      color:
+        type: "string"
+      description:
+        type: "string"
+      hasRunningJob:
+        type: "string"
+      id:
+        type: "string"
+      localizedName:
+        type: "string"
+      name:
+        type: "string"
+      ordinal:
+        type: "string"
+    type: "object"
+  EnumProjectCustomField:
+    required:
+    - "bundle"
+    - "canBeEmpty"
+    - "condition"
+    - "defaultValues"
+    - "emptyFieldText"
+    - "field"
+    - "hasRunningJob"
+    - "id"
+    - "isPublic"
+    - "ordinal"
+    - "project"
+    properties:
+      bundle:
+        type: "string"
+      canBeEmpty:
+        type: "string"
+      condition:
+        type: "string"
+      defaultValues:
+        type: "string"
+      emptyFieldText:
+        type: "string"
+      field:
+        type: "string"
+      hasRunningJob:
+        type: "string"
+      id:
+        type: "string"
+      isPublic:
+        type: "string"
+      ordinal:
+        type: "string"
+      project:
+        type: "string"
+    type: "object"
+  ExternalIssue:
+    required:
+    - "commentsKey"
+    - "commentsUrl"
+    - "historyKey"
+    - "historyUrl"
+    - "id"
+    - "key"
+    - "name"
+    - "url"
+    properties:
+      commentsKey:
+        type: "string"
+      commentsUrl:
+        type: "string"
+      historyKey:
+        type: "string"
+      historyUrl:
+        type: "string"
+      id:
+        type: "string"
+      key:
+        type: "string"
+      name:
+        type: "string"
+      url:
+        type: "string"
+    type: "object"
+  FieldBasedCondition:
+    required:
+    - "field"
+    - "showForNullValue"
+    - "values"
+    - "id"
+    - "parent"
+    properties:
+      field:
+        type: "string"
+      showForNullValue:
+        type: "string"
+      values:
+        type: "string"
+      id:
+        type: "string"
+      parent:
+        type: "string"
+    type: "object"
+  FieldStyle:
+    required:
+    - "background"
+    - "foreground"
+    - "id"
+    properties:
+      background:
+        type: "string"
+      foreground:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  GlobalSettings:
+    required:
+    - "appearanceSettings"
+    - "license"
+    - "limitations"
+    - "localeSettings"
+    - "loggingSettings"
+    - "notificationSettings"
+    - "restSettings"
+    - "shortcutSettings"
+    - "systemSettings"
+    - "updateInfo"
+    - "id"
+    properties:
+      appearanceSettings:
+        type: "string"
+      license:
+        type: "string"
+      limitations:
+        type: "string"
+      localeSettings:
+        type: "string"
+      loggingSettings:
+        type: "string"
+      notificationSettings:
+        type: "string"
+      restSettings:
+        type: "string"
+      shortcutSettings:
+        type: "string"
+      systemSettings:
+        type: "string"
+      updateInfo:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  GroupProjectCustomField:
+    required:
+    - "defaultValues"
+    - "canBeEmpty"
+    - "condition"
+    - "emptyFieldText"
+    - "field"
+    - "hasRunningJob"
+    - "id"
+    - "isPublic"
+    - "ordinal"
+    - "project"
+    properties:
+      defaultValues:
+        type: "string"
+      canBeEmpty:
+        type: "string"
+      condition:
+        type: "string"
+      emptyFieldText:
+        type: "string"
+      field:
+        type: "string"
+      hasRunningJob:
+        type: "string"
+      id:
+        type: "string"
+      isPublic:
+        type: "string"
+      ordinal:
+        type: "string"
+      project:
+        type: "string"
+    type: "object"
+  Issue:
+    required:
+    - "attachments"
+    - "comments"
+    - "created"
+    - "description"
+    - "draftComment"
+    - "draftOwner"
+    - "externalIssue"
+    - "fields"
+    - "idReadable"
+    - "isDraft"
+    - "links"
+    - "numberInProject"
+    - "parent"
+    - "project"
+    - "reporter"
+    - "resolved"
+    - "subtasks"
+    - "summary"
+    - "tags"
+    - "updated"
+    - "updater"
+    - "usesMarkdown"
+    - "visibility"
+    - "voters"
+    - "votes"
+    - "watchers"
+    - "wikifiedDescription"
+    - "id"
+    properties:
+      attachments:
+        type: "string"
+      comments:
+        type: "string"
+      created:
+        type: "string"
+      description:
+        type: "string"
+      draftComment:
+        type: "string"
+      draftOwner:
+        type: "string"
+      externalIssue:
+        type: "string"
+      fields:
+        type: "string"
+      idReadable:
+        type: "string"
+      isDraft:
+        type: "string"
+      links:
+        type: "string"
+      numberInProject:
+        type: "string"
+      parent:
+        type: "string"
+      project:
+        type: "string"
+      reporter:
+        type: "string"
+      resolved:
+        type: "string"
+      subtasks:
+        type: "string"
+      summary:
+        type: "string"
+      tags:
+        type: "string"
+      updated:
+        type: "string"
+      updater:
+        type: "string"
+      usesMarkdown:
+        type: "string"
+      visibility:
+        type: "string"
+      voters:
+        type: "string"
+      votes:
+        type: "string"
+      watchers:
+        type: "string"
+      wikifiedDescription:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  IssueAttachment:
+    required:
+    - "author"
+    - "base64Content"
+    - "charset"
+    - "comment"
+    - "created"
+    - "draft"
+    - "extension"
+    - "issue"
+    - "metaData"
+    - "mimeType"
+    - "name"
+    - "removed"
+    - "size"
+    - "thumbnailURL"
+    - "updated"
+    - "url"
+    - "visibility"
+    - "id"
+    properties:
+      author:
+        type: "string"
+      base64Content:
+        type: "string"
+      charset:
+        type: "string"
+      comment:
+        type: "string"
+      created:
+        type: "string"
+      draft:
+        type: "string"
+      extension:
+        type: "string"
+      issue:
+        type: "string"
+      metaData:
+        type: "string"
+      mimeType:
+        type: "string"
+      name:
+        type: "string"
+      removed:
+        type: "string"
+      size:
+        type: "string"
+      thumbnailURL:
+        type: "string"
+      updated:
+        type: "string"
+      url:
+        type: "string"
+      visibility:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  IssueBasedSwimlaneSettings:
+    required:
+    - "defaultCardType"
+    - "field"
+    - "values"
+    - "enabled"
+    - "id"
+    - "parent"
+    properties:
+      defaultCardType:
+        type: "string"
+      field:
+        type: "string"
+      values:
+        type: "string"
+      enabled:
+        type: "string"
+      id:
+        type: "string"
+      parent:
+        type: "string"
+    type: "object"
+  IssueComment:
+    required:
+    - "author"
+    - "checkboxes"
+    - "deleted"
+    - "issue"
+    - "attachments"
+    - "created"
+    - "id"
+    - "text"
+    - "textPreview"
+    - "updated"
+    - "usesMarkdown"
+    - "visibility"
+    properties:
+      author:
+        type: "string"
+      checkboxes:
+        type: "string"
+      deleted:
+        type: "string"
+      issue:
+        type: "string"
+      attachments:
+        type: "string"
+      created:
+        type: "string"
+      id:
+        type: "string"
+      text:
+        type: "string"
+      textPreview:
+        type: "string"
+      updated:
+        type: "string"
+      usesMarkdown:
+        type: "string"
+      visibility:
+        type: "string"
+    type: "object"
+  IssueLink:
+    required:
+    - "direction"
+    - "id"
+    - "issues"
+    - "linkType"
+    - "trimmedIssues"
+    properties:
+      direction:
+        type: "string"
+      id:
+        type: "string"
+      issues:
+        type: "string"
+      linkType:
+        type: "string"
+      trimmedIssues:
+        type: "string"
+    type: "object"
+  IssueLinkType:
+    required:
+    - "aggregation"
+    - "directed"
+    - "localizedName"
+    - "localizedSourceToTarget"
+    - "localizedTargetToSource"
+    - "name"
+    - "readOnly"
+    - "sourceToTarget"
+    - "targetToSource"
+    - "uid"
+    - "id"
+    properties:
+      aggregation:
+        type: "string"
+      directed:
+        type: "string"
+      localizedName:
+        type: "string"
+      localizedSourceToTarget:
+        type: "string"
+      localizedTargetToSource:
+        type: "string"
+      name:
+        type: "string"
+      readOnly:
+        type: "string"
+      sourceToTarget:
+        type: "string"
+      targetToSource:
+        type: "string"
+      uid:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  IssueTag:
+    required:
+    - "color"
+    - "issues"
+    - "owner"
+    - "untagOnResolve"
+    - "id"
+    - "name"
+    - "updateableBy"
+    - "visibleFor"
+    properties:
+      color:
+        type: "string"
+      issues:
+        type: "string"
+      owner:
+        type: "string"
+      untagOnResolve:
+        type: "string"
+      id:
+        type: "string"
+      name:
+        type: "string"
+      updateableBy:
+        type: "string"
+      visibleFor:
+        type: "string"
+    type: "object"
+  IssueVoters:
+    required:
+    - "duplicate"
+    - "hasVote"
+    - "original"
+    - "id"
+    properties:
+      duplicate:
+        type: "string"
+      hasVote:
+        type: "string"
+      original:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  IssueWatcher:
+    required:
+    - "id"
+    - "isStarred"
+    - "issue"
+    - "user"
+    properties:
+      id:
+        type: "string"
+      isStarred:
+        type: "string"
+      issue:
+        type: "string"
+      user:
+        type: "string"
+    type: "object"
+  IssueWatchers:
+    required:
+    - "duplicateWatchers"
+    - "hasStar"
+    - "id"
+    - "issueWatchers"
+    properties:
+      duplicateWatchers:
+        type: "string"
+      hasStar:
+        type: "string"
+      id:
+        type: "string"
+      issueWatchers:
+        type: "string"
+    type: "object"
+  IssueWorkItem:
+    required:
+    - "created"
+    - "date"
+    - "duration"
+    - "issue"
+    - "updated"
+    - "author"
+    - "creator"
+    - "id"
+    - "text"
+    - "textPreview"
+    - "type"
+    - "usesMarkdown"
+    properties:
+      created:
+        type: "string"
+      date:
+        type: "string"
+      duration:
+        type: "string"
+      issue:
+        type: "string"
+      updated:
+        type: "string"
+      author:
+        type: "string"
+      creator:
+        type: "string"
+      id:
+        type: "string"
+      text:
+        type: "string"
+      textPreview:
+        type: "string"
+      type:
+        type: "string"
+      usesMarkdown:
+        type: "string"
+    type: "object"
+  JabberSettings:
+    required:
+    - "host"
+    - "isBotEnabled"
+    - "isEnabled"
+    - "login"
+    - "port"
+    - "readAccess"
+    - "serviceName"
+    - "sslKey"
+    - "id"
+    properties:
+      host:
+        type: "string"
+      isBotEnabled:
+        type: "string"
+      isEnabled:
+        type: "string"
+      login:
+        type: "string"
+      port:
+        type: "string"
+      readAccess:
+        type: "string"
+      serviceName:
+        type: "string"
+      sslKey:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  License:
+    required:
+    - "enableExpirationWarning"
+    - "error"
+    - "isFreeLicenseUsed"
+    - "isTrialLicenseUsed"
+    - "license"
+    - "licenseCode"
+    - "period"
+    - "prepaid"
+    - "setupComplete"
+    - "username"
+    - "id"
+    properties:
+      enableExpirationWarning:
+        type: "string"
+      error:
+        type: "string"
+      isFreeLicenseUsed:
+        type: "string"
+      isTrialLicenseUsed:
+        type: "string"
+      license:
+        type: "string"
+      licenseCode:
+        type: "string"
+      period:
+        type: "string"
+      prepaid:
+        type: "string"
+      setupComplete:
+        type: "string"
+      username:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  Limitations:
+    required:
+    - "timeToExhaustDisk"
+    - "usableSpace"
+    - "id"
+    properties:
+      timeToExhaustDisk:
+        type: "string"
+      usableSpace:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  LimitedVisibility:
+    required:
+    - "implicitPermittedUsers"
+    - "permittedGroups"
+    - "permittedUsers"
+    - "id"
+    properties:
+      implicitPermittedUsers:
+        type: "string"
+      permittedGroups:
+        type: "string"
+      permittedUsers:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  LocaleDescriptor:
+    required:
+    - "community"
+    - "id"
+    - "language"
+    - "locale"
+    - "name"
+    properties:
+      community:
+        type: "string"
+      id:
+        type: "string"
+      language:
+        type: "string"
+      locale:
+        type: "string"
+      name:
+        type: "string"
+    type: "object"
+  LocaleSettings:
+    required:
+    - "isRTL"
+    - "locale"
+    - "targetLocale"
+    - "id"
+    properties:
+      isRTL:
+        type: "string"
+      locale:
+        type: "string"
+      targetLocale:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  LoggingSettings:
+    required:
+    - "debugCategories"
+    - "id"
+    properties:
+      debugCategories:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  Logo:
+    required:
+    - "id"
+    - "url"
+    properties:
+      id:
+        type: "string"
+      url:
+        type: "string"
+    type: "object"
+  NotificationSettings:
+    required:
+    - "emailSettings"
+    - "jabberSettings"
+    - "restSettings"
+    - "id"
+    properties:
+      emailSettings:
+        type: "string"
+      jabberSettings:
+        type: "string"
+      restSettings:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  OnlineUsers:
+    required:
+    - "sessions"
+    - "users"
+    - "windows"
+    - "id"
+    properties:
+      sessions:
+        type: "string"
+      users:
+        type: "string"
+      windows:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  OwnedBundle:
+    required:
+    - "values"
+    - "id"
+    - "isUpdateable"
+    - "name"
+    properties:
+      values:
+        type: "string"
+      id:
+        type: "string"
+      isUpdateable:
+        type: "string"
+      name:
+        type: "string"
+    type: "object"
+  OwnedBundleCustomFieldDefaults:
+    required:
+    - "bundle"
+    - "defaultValues"
+    - "canBeEmpty"
+    - "emptyFieldText"
+    - "id"
+    - "isPublic"
+    - "parent"
+    properties:
+      bundle:
+        type: "string"
+      defaultValues:
+        type: "string"
+      canBeEmpty:
+        type: "string"
+      emptyFieldText:
+        type: "string"
+      id:
+        type: "string"
+      isPublic:
+        type: "string"
+      parent:
+        type: "string"
+    type: "object"
+  OwnedBundleElement:
+    required:
+    - "bundle"
+    - "owner"
+    - "color"
+    - "description"
+    - "hasRunningJob"
+    - "id"
+    - "name"
+    - "ordinal"
+    properties:
+      bundle:
+        type: "string"
+      owner:
+        type: "string"
+      color:
+        type: "string"
+      description:
+        type: "string"
+      hasRunningJob:
+        type: "string"
+      id:
+        type: "string"
+      name:
+        type: "string"
+      ordinal:
+        type: "string"
+    type: "object"
+  OwnedProjectCustomField:
+    required:
+    - "bundle"
+    - "canBeEmpty"
+    - "condition"
+    - "defaultValues"
+    - "emptyFieldText"
+    - "field"
+    - "hasRunningJob"
+    - "id"
+    - "isPublic"
+    - "ordinal"
+    - "project"
+    properties:
+      bundle:
+        type: "string"
+      canBeEmpty:
+        type: "string"
+      condition:
+        type: "string"
+      defaultValues:
+        type: "string"
+      emptyFieldText:
+        type: "string"
+      field:
+        type: "string"
+      hasRunningJob:
+        type: "string"
+      id:
+        type: "string"
+      isPublic:
+        type: "string"
+      ordinal:
+        type: "string"
+      project:
+        type: "string"
+    type: "object"
+  ParsedCommand:
+    required:
+    - "delete"
+    - "description"
+    - "error"
+    - "id"
+    properties:
+      delete:
+        type: "string"
+      description:
+        type: "string"
+      error:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  PeriodProjectCustomField:
+    required:
+    - "canBeEmpty"
+    - "condition"
+    - "emptyFieldText"
+    - "field"
+    - "hasRunningJob"
+    - "id"
+    - "isPublic"
+    - "ordinal"
+    - "project"
+    properties:
+      canBeEmpty:
+        type: "string"
+      condition:
+        type: "string"
+      emptyFieldText:
+        type: "string"
+      field:
+        type: "string"
+      hasRunningJob:
+        type: "string"
+      id:
+        type: "string"
+      isPublic:
+        type: "string"
+      ordinal:
+        type: "string"
+      project:
+        type: "string"
+    type: "object"
+  PredefinedFilterField:
+    required:
+    - "id"
+    - "instant"
+    - "presentation"
+    - "aggregateable"
+    - "baseField"
+    - "name"
+    - "sortable"
+    properties:
+      id:
+        type: "string"
+      instant:
+        type: "string"
+      presentation:
+        type: "string"
+      aggregateable:
+        type: "string"
+      baseField:
+        type: "string"
+      name:
+        type: "string"
+      sortable:
+        type: "string"
+    type: "object"
+  Project:
+    required:
+    - "archived"
+    - "createdBy"
+    - "description"
+    - "fields"
+    - "fromEmail"
+    - "hubResourceId"
+    - "iconUrl"
+    - "issues"
+    - "leader"
+    - "replyToEmail"
+    - "ringId"
+    - "shortName"
+    - "startingNumber"
+    - "id"
+    - "name"
+    properties:
+      archived:
+        type: "string"
+      createdBy:
+        type: "string"
+      description:
+        type: "string"
+      fields:
+        type: "string"
+      fromEmail:
+        type: "string"
+      hubResourceId:
+        type: "string"
+      iconUrl:
+        type: "string"
+      issues:
+        type: "string"
+      leader:
+        type: "string"
+      replyToEmail:
+        type: "string"
+      ringId:
+        type: "string"
+      shortName:
+        type: "string"
+      startingNumber:
+        type: "string"
+      id:
+        type: "string"
+      name:
+        type: "string"
+    type: "object"
+  ProjectBasedColorCoding:
+    required:
+    - "projectColors"
+    - "agile"
+    - "id"
+    properties:
+      projectColors:
+        type: "string"
+      agile:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  ProjectColor:
+    required:
+    - "color"
+    - "id"
+    - "project"
+    properties:
+      color:
+        type: "string"
+      id:
+        type: "string"
+      project:
+        type: "string"
+    type: "object"
+  ProjectCustomField:
+    required:
+    - "canBeEmpty"
+    - "condition"
+    - "emptyFieldText"
+    - "field"
+    - "hasRunningJob"
+    - "isPublic"
+    - "ordinal"
+    - "project"
+    - "id"
+    properties:
+      canBeEmpty:
+        type: "string"
+      condition:
+        type: "string"
+      emptyFieldText:
+        type: "string"
+      field:
+        type: "string"
+      hasRunningJob:
+        type: "string"
+      isPublic:
+        type: "string"
+      ordinal:
+        type: "string"
+      project:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  ProjectTimeTrackingSettings:
+    required:
+    - "enabled"
+    - "estimate"
+    - "project"
+    - "timeSpent"
+    - "workItemTypes"
+    - "id"
+    properties:
+      enabled:
+        type: "string"
+      estimate:
+        type: "string"
+      project:
+        type: "string"
+      timeSpent:
+        type: "string"
+      workItemTypes:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  RestCorsSettings:
+    required:
+    - "allowAllOrigins"
+    - "allowedOrigins"
+    - "id"
+    properties:
+      allowAllOrigins:
+        type: "string"
+      allowedOrigins:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  ShortcutSettings:
+    required:
+    - "serverShortcuts"
+    - "shortcuts"
+    - "id"
+    properties:
+      serverShortcuts:
+        type: "string"
+      shortcuts:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  SimpleProjectCustomField:
+    required:
+    - "canBeEmpty"
+    - "condition"
+    - "emptyFieldText"
+    - "field"
+    - "hasRunningJob"
+    - "id"
+    - "isPublic"
+    - "ordinal"
+    - "project"
+    properties:
+      canBeEmpty:
+        type: "string"
+      condition:
+        type: "string"
+      emptyFieldText:
+        type: "string"
+      field:
+        type: "string"
+      hasRunningJob:
+        type: "string"
+      id:
+        type: "string"
+      isPublic:
+        type: "string"
+      ordinal:
+        type: "string"
+      project:
+        type: "string"
+    type: "object"
+  Sprint:
+    required:
+    - "agile"
+    - "archived"
+    - "finish"
+    - "goal"
+    - "isDefault"
+    - "issues"
+    - "name"
+    - "previousSprint"
+    - "start"
+    - "unresolvedIssuesCount"
+    - "id"
+    properties:
+      agile:
+        type: "string"
+      archived:
+        type: "string"
+      finish:
+        type: "string"
+      goal:
+        type: "string"
+      isDefault:
+        type: "string"
+      issues:
+        type: "string"
+      name:
+        type: "string"
+      previousSprint:
+        type: "string"
+      start:
+        type: "string"
+      unresolvedIssuesCount:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  SprintsSettings:
+    required:
+    - "cardOnSeveralSprints"
+    - "defaultSprint"
+    - "disableSprints"
+    - "explicitQuery"
+    - "hideSubtasksOfCards"
+    - "isExplicit"
+    - "sprintSyncField"
+    - "id"
+    properties:
+      cardOnSeveralSprints:
+        type: "string"
+      defaultSprint:
+        type: "string"
+      disableSprints:
+        type: "string"
+      explicitQuery:
+        type: "string"
+      hideSubtasksOfCards:
+        type: "string"
+      isExplicit:
+        type: "string"
+      sprintSyncField:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  StateBundle:
+    required:
+    - "values"
+    - "id"
+    - "isUpdateable"
+    - "name"
+    properties:
+      values:
+        type: "string"
+      id:
+        type: "string"
+      isUpdateable:
+        type: "string"
+      name:
+        type: "string"
+    type: "object"
+  StateBundleCustomFieldDefaults:
+    required:
+    - "bundle"
+    - "defaultValues"
+    - "canBeEmpty"
+    - "emptyFieldText"
+    - "id"
+    - "isPublic"
+    - "parent"
+    properties:
+      bundle:
+        type: "string"
+      defaultValues:
+        type: "string"
+      canBeEmpty:
+        type: "string"
+      emptyFieldText:
+        type: "string"
+      id:
+        type: "string"
+      isPublic:
+        type: "string"
+      parent:
+        type: "string"
+    type: "object"
+  StateBundleElement:
+    required:
+    - "bundle"
+    - "isResolved"
+    - "color"
+    - "description"
+    - "hasRunningJob"
+    - "id"
+    - "localizedName"
+    - "name"
+    - "ordinal"
+    properties:
+      bundle:
+        type: "string"
+      isResolved:
+        type: "string"
+      color:
+        type: "string"
+      description:
+        type: "string"
+      hasRunningJob:
+        type: "string"
+      id:
+        type: "string"
+      localizedName:
+        type: "string"
+      name:
+        type: "string"
+      ordinal:
+        type: "string"
+    type: "object"
+  StateProjectCustomField:
+    required:
+    - "bundle"
+    - "canBeEmpty"
+    - "condition"
+    - "defaultValues"
+    - "emptyFieldText"
+    - "field"
+    - "hasRunningJob"
+    - "id"
+    - "isPublic"
+    - "ordinal"
+    - "project"
+    properties:
+      bundle:
+        type: "string"
+      canBeEmpty:
+        type: "string"
+      condition:
+        type: "string"
+      defaultValues:
+        type: "string"
+      emptyFieldText:
+        type: "string"
+      field:
+        type: "string"
+      hasRunningJob:
+        type: "string"
+      id:
+        type: "string"
+      isPublic:
+        type: "string"
+      ordinal:
+        type: "string"
+      project:
+        type: "string"
+    type: "object"
+  StorageEntry:
+    required:
+    - "name"
+    - "id"
+    properties:
+      name:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  Suggestion:
+    required:
+    - "auxiliaryIcon"
+    - "caret"
+    - "className"
+    - "completionEnd"
+    - "completionStart"
+    - "description"
+    - "group"
+    - "icon"
+    - "id"
+    - "matchingEnd"
+    - "matchingStart"
+    - "option"
+    - "prefix"
+    - "suffix"
+    properties:
+      auxiliaryIcon:
+        type: "string"
+      caret:
+        type: "string"
+      className:
+        type: "string"
+      completionEnd:
+        type: "string"
+      completionStart:
+        type: "string"
+      description:
+        type: "string"
+      group:
+        type: "string"
+      icon:
+        type: "string"
+      id:
+        type: "string"
+      matchingEnd:
+        type: "string"
+      matchingStart:
+        type: "string"
+      option:
+        type: "string"
+      prefix:
+        type: "string"
+      suffix:
+        type: "string"
+    type: "object"
+  SwimlaneEntityAttributeValue:
+    required:
+    - "isResolved"
+    - "name"
+    - "parent"
+    - "presentation"
+    - "swimlaneSettings"
+    - "field"
+    - "id"
+    properties:
+      isResolved:
+        type: "string"
+      name:
+        type: "string"
+      parent:
+        type: "string"
+      presentation:
+        type: "string"
+      swimlaneSettings:
+        type: "string"
+      field:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  SwimlaneValue:
+    required:
+    - "agileEntity"
+    - "id"
+    - "name"
+    - "presentation"
+    properties:
+      agileEntity:
+        type: "string"
+      id:
+        type: "string"
+      name:
+        type: "string"
+      presentation:
+        type: "string"
+    type: "object"
+  SystemSettings:
+    required:
+    - "administratorEmail"
+    - "allowStatisticsCollection"
+    - "baseUrl"
+    - "isApplicationReadOnly"
+    - "maxExportItems"
+    - "maxOrderedIssues"
+    - "maxUploadFileSize"
+    - "id"
+    properties:
+      administratorEmail:
+        type: "string"
+      allowStatisticsCollection:
+        type: "string"
+      baseUrl:
+        type: "string"
+      isApplicationReadOnly:
+        type: "string"
+      maxExportItems:
+        type: "string"
+      maxOrderedIssues:
+        type: "string"
+      maxUploadFileSize:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  Telemetry:
+    required:
+    - "allocatedMemory"
+    - "availableMemory"
+    - "availableProcessors"
+    - "blobStringsCacheHitRate"
+    - "cachedResultsCountInDBQueriesCache"
+    - "databaseBackgroundThreads"
+    - "databaseLocation"
+    - "databaseQueriesCacheHitRate"
+    - "databaseSize"
+    - "fullDatabaseSize"
+    - "installationFolder"
+    - "jobs"
+    - "logsLocation"
+    - "onlineUsers"
+    - "pendingAsyncJobs"
+    - "requestsPerSecond"
+    - "startedTime"
+    - "textIndexSize"
+    - "totalTransactions"
+    - "transactionsPerSecond"
+    - "uptime"
+    - "usedMemory"
+    - "id"
+    properties:
+      allocatedMemory:
+        type: "string"
+      availableMemory:
+        type: "string"
+      availableProcessors:
+        type: "string"
+      blobStringsCacheHitRate:
+        type: "string"
+      cachedResultsCountInDBQueriesCache:
+        type: "string"
+      databaseBackgroundThreads:
+        type: "string"
+      databaseLocation:
+        type: "string"
+      databaseQueriesCacheHitRate:
+        type: "string"
+      databaseSize:
+        type: "string"
+      fullDatabaseSize:
+        type: "string"
+      installationFolder:
+        type: "string"
+      jobs:
+        type: "string"
+      logsLocation:
+        type: "string"
+      onlineUsers:
+        type: "string"
+      pendingAsyncJobs:
+        type: "string"
+      requestsPerSecond:
+        type: "string"
+      startedTime:
+        type: "string"
+      textIndexSize:
+        type: "string"
+      totalTransactions:
+        type: "string"
+      transactionsPerSecond:
+        type: "string"
+      uptime:
+        type: "string"
+      usedMemory:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  TextIndexSettings:
+    required:
+    - "documentsToIndex"
+    - "indexingInProgress"
+    - "languages"
+    - "suspended"
+    - "id"
+    properties:
+      documentsToIndex:
+        type: "string"
+      indexingInProgress:
+        type: "string"
+      languages:
+        type: "string"
+      suspended:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  TextProjectCustomField:
+    required:
+    - "canBeEmpty"
+    - "condition"
+    - "emptyFieldText"
+    - "field"
+    - "hasRunningJob"
+    - "id"
+    - "isPublic"
+    - "ordinal"
+    - "project"
+    properties:
+      canBeEmpty:
+        type: "string"
+      condition:
+        type: "string"
+      emptyFieldText:
+        type: "string"
+      field:
+        type: "string"
+      hasRunningJob:
+        type: "string"
+      id:
+        type: "string"
+      isPublic:
+        type: "string"
+      ordinal:
+        type: "string"
+      project:
+        type: "string"
+    type: "object"
+  TimeTrackingSettings:
+    required:
+    - "workItemTypes"
+    - "workTimeSettings"
+    - "id"
+    properties:
+      workItemTypes:
+        type: "string"
+      workTimeSettings:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  TimeZoneDescriptor:
+    required:
+    - "id"
+    - "offset"
+    - "presentation"
+    properties:
+      id:
+        type: "string"
+      offset:
+        type: "string"
+      presentation:
+        type: "string"
+    type: "object"
+  UnlimitedVisibility:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "string"
+    type: "object"
+  UpdateInfo:
+    required:
+    - "isChecking"
+    - "result"
+    - "id"
+    properties:
+      isChecking:
+        type: "string"
+      result:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  User:
+    required:
+    - "avatarUrl"
+    - "banned"
+    - "email"
+    - "fullName"
+    - "guest"
+    - "jabberAccountName"
+    - "login"
+    - "name"
+    - "online"
+    - "profiles"
+    - "ringId"
+    - "tags"
+    - "id"
+    properties:
+      avatarUrl:
+        type: "string"
+      banned:
+        type: "string"
+      email:
+        type: "string"
+      fullName:
+        type: "string"
+      guest:
+        type: "string"
+      jabberAccountName:
+        type: "string"
+      login:
+        type: "string"
+      name:
+        type: "string"
+      online:
+        type: "string"
+      profiles:
+        type: "string"
+      ringId:
+        type: "string"
+      tags:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  UserBundle:
+    required:
+    - "aggregatedUsers"
+    - "groups"
+    - "individuals"
+    - "id"
+    - "isUpdateable"
+    - "name"
+    properties:
+      aggregatedUsers:
+        type: "string"
+      groups:
+        type: "string"
+      individuals:
+        type: "string"
+      id:
+        type: "string"
+      isUpdateable:
+        type: "string"
+      name:
+        type: "string"
+    type: "object"
+  UserCustomFieldDefaults:
+    required:
+    - "bundle"
+    - "defaultValues"
+    - "canBeEmpty"
+    - "emptyFieldText"
+    - "id"
+    - "isPublic"
+    - "parent"
+    properties:
+      bundle:
+        type: "string"
+      defaultValues:
+        type: "string"
+      canBeEmpty:
+        type: "string"
+      emptyFieldText:
+        type: "string"
+      id:
+        type: "string"
+      isPublic:
+        type: "string"
+      parent:
+        type: "string"
+    type: "object"
+  UserGroup:
+    required:
+    - "allUsersGroup"
+    - "icon"
+    - "name"
+    - "ringId"
+    - "teamForProject"
+    - "usersCount"
+    - "id"
+    properties:
+      allUsersGroup:
+        type: "string"
+      icon:
+        type: "string"
+      name:
+        type: "string"
+      ringId:
+        type: "string"
+      teamForProject:
+        type: "string"
+      usersCount:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  UserProjectCustomField:
+    required:
+    - "bundle"
+    - "defaultValues"
+    - "canBeEmpty"
+    - "condition"
+    - "emptyFieldText"
+    - "field"
+    - "hasRunningJob"
+    - "id"
+    - "isPublic"
+    - "ordinal"
+    - "project"
+    properties:
+      bundle:
+        type: "string"
+      defaultValues:
+        type: "string"
+      canBeEmpty:
+        type: "string"
+      condition:
+        type: "string"
+      emptyFieldText:
+        type: "string"
+      field:
+        type: "string"
+      hasRunningJob:
+        type: "string"
+      id:
+        type: "string"
+      isPublic:
+        type: "string"
+      ordinal:
+        type: "string"
+      project:
+        type: "string"
+    type: "object"
+  VersionBundle:
+    required:
+    - "values"
+    - "id"
+    - "isUpdateable"
+    - "name"
+    properties:
+      values:
+        type: "string"
+      id:
+        type: "string"
+      isUpdateable:
+        type: "string"
+      name:
+        type: "string"
+    type: "object"
+  VersionBundleCustomFieldDefaults:
+    required:
+    - "bundle"
+    - "defaultValues"
+    - "canBeEmpty"
+    - "emptyFieldText"
+    - "id"
+    - "isPublic"
+    - "parent"
+    properties:
+      bundle:
+        type: "string"
+      defaultValues:
+        type: "string"
+      canBeEmpty:
+        type: "string"
+      emptyFieldText:
+        type: "string"
+      id:
+        type: "string"
+      isPublic:
+        type: "string"
+      parent:
+        type: "string"
+    type: "object"
+  VersionBundleElement:
+    required:
+    - "archived"
+    - "bundle"
+    - "releaseDate"
+    - "released"
+    - "color"
+    - "description"
+    - "hasRunningJob"
+    - "id"
+    - "name"
+    - "ordinal"
+    properties:
+      archived:
+        type: "string"
+      bundle:
+        type: "string"
+      releaseDate:
+        type: "string"
+      released:
+        type: "string"
+      color:
+        type: "string"
+      description:
+        type: "string"
+      hasRunningJob:
+        type: "string"
+      id:
+        type: "string"
+      name:
+        type: "string"
+      ordinal:
+        type: "string"
+    type: "object"
+  VersionProjectCustomField:
+    required:
+    - "bundle"
+    - "canBeEmpty"
+    - "condition"
+    - "defaultValues"
+    - "emptyFieldText"
+    - "field"
+    - "hasRunningJob"
+    - "id"
+    - "isPublic"
+    - "ordinal"
+    - "project"
+    properties:
+      bundle:
+        type: "string"
+      canBeEmpty:
+        type: "string"
+      condition:
+        type: "string"
+      defaultValues:
+        type: "string"
+      emptyFieldText:
+        type: "string"
+      field:
+        type: "string"
+      hasRunningJob:
+        type: "string"
+      id:
+        type: "string"
+      isPublic:
+        type: "string"
+      ordinal:
+        type: "string"
+      project:
+        type: "string"
+    type: "object"
+  Visibility:
+    required:
+    - "id"
+    properties:
+      id:
+        type: "string"
+    type: "object"
+  WIPLimit:
+    required:
+    - "column"
+    - "max"
+    - "min"
+    - "id"
+    properties:
+      column:
+        type: "string"
+      max:
+        type: "string"
+      min:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  WorkItemType:
+    required:
+    - "autoAttached"
+    - "name"
+    - "id"
+    properties:
+      autoAttached:
+        type: "string"
+      name:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"
+  WorkTimeSettings:
+    required:
+    - "daysAWeek"
+    - "firstDayOfWeek"
+    - "minutesADay"
+    - "workDays"
+    - "id"
+    properties:
+      daysAWeek:
+        type: "string"
+      firstDayOfWeek:
+        type: "string"
+      minutesADay:
+        type: "string"
+      workDays:
+        type: "string"
+      id:
+        type: "string"
+    type: "object"

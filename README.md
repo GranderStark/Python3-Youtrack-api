@@ -2,7 +2,7 @@
 python 3 api for youtrack
 [![PyPI](https://img.shields.io/badge/pypi-0.1-orange.svg)](https://pypi.org/project/Python3-Youtrack-api/) [![PyPI](https://img.shields.io/badge/python-3-blue.svg)](https://pypi.org/project/Python3-Youtrack-api/)
 
-What's implemented
+What's implemented:
 - get_issues
 - get_issue
 - get_project
@@ -12,8 +12,8 @@ What's implemented
 Usage
 ```python
 from youtrack.client import Connection
-yt = Connection('yt.example.com', auth=('admin', 'admin'))
 
+yt = Connection('yt.example.com', auth=('admin', 'admin'))
 
 issue_name = 'prj-1'
 date_timestamp = 1543525200000

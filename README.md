@@ -3,11 +3,11 @@ python 3 api for youtrack
 [![PyPI](https://img.shields.io/badge/pypi-0.1-orange.svg)](https://pypi.org/project/Python3-Youtrack-api/) [![PyPI](https://img.shields.io/badge/python-3-blue.svg)](https://pypi.org/project/Python3-Youtrack-api/)
 
 What's implemented
-get_issues
-get_issue
-get_project
-get_accessible_projects
-add_time_entry
+- get_issues
+- get_issue
+- get_project
+- get_accessible_projects
+- add_time_entry
 
 Usage
 ```python

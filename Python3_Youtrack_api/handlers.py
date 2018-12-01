@@ -1,4 +1,4 @@
-from youtrack.models import BaseModel
+from .models import BaseModel
 
 
 class BaseHandler:
@@ -73,7 +73,7 @@ class AddTimeToIssueHandler(BaseHandler):
 
     @classmethod
     def make_url(cls):
-        cls.url = cls.connection.url + '/ {}/timeTracking/workItems'.format(cls.context.get('entry_id'))
+        cls.url = cls.connection.url + '/api/issues/{}/timeTracking/workItems'.format(cls.context.get('entry_id'))
 
     @classmethod
     def make_json_data(cls):

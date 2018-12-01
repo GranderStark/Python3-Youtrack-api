@@ -1,11 +1,11 @@
 import requests
-from youtrack.handlers import AddTimeToIssueHandler
-from youtrack.handlers import Context
-from youtrack.handlers import GetAccessibleProjectsHandler
-from youtrack.handlers import GetIssueHandler
-from youtrack.handlers import GetIssuesHandler
-from youtrack.handlers import GetProjectHandler
-from youtrack.handlers import ResponseHandler
+from .handlers import AddTimeToIssueHandler
+from .handlers import Context
+from .handlers import GetAccessibleProjectsHandler
+from .handlers import GetIssueHandler
+from .handlers import GetIssuesHandler
+from .handlers import GetProjectHandler
+from .handlers import ResponseHandler
 
 from . import exceptions
 

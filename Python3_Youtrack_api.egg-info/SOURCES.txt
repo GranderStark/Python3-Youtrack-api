@@ -1,7 +1,0 @@
-setup.py
-Python3_Youtrack_api.egg-info/PKG-INFO
-Python3_Youtrack_api.egg-info/SOURCES.txt
-Python3_Youtrack_api.egg-info/dependency_links.txt
-Python3_Youtrack_api.egg-info/not-zip-safe
-Python3_Youtrack_api.egg-info/requires.txt
-Python3_Youtrack_api.egg-info/top_level.txt

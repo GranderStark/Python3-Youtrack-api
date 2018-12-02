@@ -12,7 +12,7 @@ What's implemented:
 
 Usage
 ```python
-from youtrack.client import Connection
+from python3_youtrack_api.client import Connection
 
 yt = Connection('yt.example.com', auth=('admin', 'admin'))
 

@@ -1,0 +1,36 @@
+#!/usr/bin/python3
+'''
+  getissue
+  youtrack API usage attempt 1
+'''
+
+import os
+import sys
+
+
+try:
+    from python3_youtrack_api.client import Connection
+except ImportError:
+    print('E: import youtrack module failed')
+    print('I: sudo pip3 install Python3-Youtrack-api')
+    sys.exit(1)
+
+username = os.getenv('LOGNAME')
+password = os.getenv('YT_PASSWORD')
+
+yt = Connection('https://youtrack.example.com', auth=(username, password))
+
+if len(sys.argv) < 2:
+    # set an existing issue name
+    issue_name = 'prj-1'
+else:
+    issue_name = sys.argv[1]
+
+try:
+    myissue = yt.get_issue(issue_name)
+except ImportError:
+    # FIXME  proper exception handler
+    print('text %s HELP' % issue_name)
+    sys.exit(1)
+
+print(myissue)

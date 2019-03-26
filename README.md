@@ -23,3 +23,5 @@ minutes_spent = 720
 yt.add_time_entry(issue_name, date_timestamp, minutes_spent)
 
 ```
+
+See also `examples/`

@@ -1,0 +1,39 @@
+#!/usr/bin/python3
+'''
+  timespent
+  youtrack API usage attempt 0
+'''
+
+import datetime
+import os
+import sys
+
+
+try:
+    from python3_youtrack_api.client import Connection
+except ImportError:
+    print('E: import youtrack module failed')
+    print('I: sudo pip3 install Python3-Youtrack-api')
+    sys.exit(1)
+
+username = os.getenv('LOGNAME')
+password = os.getenv('YT_PASSWORD')
+
+yt = Connection('https://youtrack.example.com', auth=(username, password))
+
+if len(sys.argv) < 2:
+    # set an existing issue name
+    issue_name = 'prj-1'
+else:
+    issue_name = sys.argv[1]
+
+date_timestamp = 1543525200000
+date_timestamp = datetime.datetime.now().replace(microsecond=0).strftime("%s")
+minutes_spent = 15
+
+try:
+    yt.add_time_entry(issue_name, date_timestamp, minutes_spent)
+except ImportError:
+    # FIXME  proper exception handler
+    print('text %s HELP' % issue_name)
+    sys.exit(1)

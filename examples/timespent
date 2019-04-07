@@ -29,6 +29,7 @@ else:
 
 date_timestamp = 1543525200000
 date_timestamp = datetime.datetime.now().replace(microsecond=0).strftime("%s")
+date_timestamp = int(date_timestamp)
 minutes_spent = 15
 
 try:

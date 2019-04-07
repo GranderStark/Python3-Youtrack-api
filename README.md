@@ -14,8 +14,6 @@ Usage
 ```bash
 pip install Python3-Youtrack-api
 ```
-
-
 ```python
 from python3_youtrack_api.client import Connection
 
